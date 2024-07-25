@@ -39,15 +39,16 @@ const Navbar = () => {
       return
     }
     const response = await axios.get(`/api/user?search=${search}`)
-    setChats(response.data)
-    console.log(response.data);
-    setLoading(false)
+    // setChats(response.data)
     setSearchResult(response.data)
+    // console.log(response.data);
+    setLoading(false)
+    // setSearchResult(response.data)
   }
   const accessChat = async(userId)=>{
     setLoadingChat(true)
     try {
-      const response = await axios.post('/api/chat',{userId})
+      const response = await axios.post('/api/chat',{userId},{withCredentials:true})
       console.log('access chat',response.data);
       setSelectedChat(response.data)
       const {data}= await response
@@ -71,7 +72,7 @@ const Navbar = () => {
     <InputLeftAddon h={6} ><SearchIcon h={6} /></InputLeftAddon>
     <Button h={6} onClick={onOpen}>Search</Button>
     </InputGroup>
-      <Text>Talk-More</Text>
+      <Text>Conversify</Text>
       <Box paddingInlineEnd={3}>
       <Menu>
         <MenuButton><BellIcon fontSize='2xl'/></MenuButton>

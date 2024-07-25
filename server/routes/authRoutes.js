@@ -8,7 +8,7 @@ authRouter.get('/api/success',ifauthenticated)
 
 authRouter.post('/api/login',passport.authenticate('local',{failureMessage:'error',}),(req,res)=>{
     
-    return res.json({success:'authenticated',user:{email:req.user.email,username:req.user.userName,pic:req.user.pic,id:req.user._id}})
+    return res.json({success:'authenticated',user:{email:req.user.email,userName:req.user.userName,pic:req.user.pic,_id:req.user._id}})
 })
 authRouter.post('/api/register',registerUser)
 //wrong approach

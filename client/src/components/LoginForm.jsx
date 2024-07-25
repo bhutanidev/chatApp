@@ -30,8 +30,8 @@ const LoginForm = () => {
   return (
     <>
     <Toaster/>
-    <VStack spacing='5px'>
         <form onSubmit={(e)=>handleSubmit(e)}>
+    <VStack spacing='5px'>
         <FormControl>
             <FormLabel>Email address</FormLabel>
             <Input type='email' value={userData.email} onChange={(e)=>{setUserData({...userData,email:e.target.value})}}/>
@@ -43,8 +43,8 @@ const LoginForm = () => {
         <Button marginBlockStart='5px'
         type='submit'
         >Login</Button>
-        </form>
     </VStack>
+        </form>
     </>
   )
 }

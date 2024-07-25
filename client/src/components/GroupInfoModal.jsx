@@ -13,6 +13,9 @@ const GroupInfoModal = () => {
     // console.log(selectedChat);
     const deleteMember = async(userId,groupId)=>{
         const response = await axios.put('/api/chat/removegroup',{userId,groupId})
+        if(response.data.deleted){
+          setSelectedChat(null)
+        }
         if(response.data.error){
             toast.error(response.data.error)
             return
@@ -68,7 +71,7 @@ const GroupInfoModal = () => {
         </ModalBody>
 
         <ModalFooter>
-          <Button colorScheme='red' mr={3} onClick={()=>leaveGroup(user.id,selectedChat._id)}>
+          <Button colorScheme='red' mr={3} onClick={()=>leaveGroup(user._id,selectedChat._id)}>
             leave
           </Button>
         </ModalFooter>

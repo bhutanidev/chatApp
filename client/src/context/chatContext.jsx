@@ -18,10 +18,10 @@ export const ChatProvider = ({ children }) => {
       try {
         const response = await axios.get('/api/success');
         // const{}
-        // console.log(response.data)
+        console.log(response.data)
         if(response.data){
-          const {email,userName,pic,id} = response.data
-          setUser({email,userName,pic,id});
+          const {email,userName,pic,_id} = response.data
+          setUser({email,userName,pic,_id});
         }
 
         // console.log(user);

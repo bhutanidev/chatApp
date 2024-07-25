@@ -56,7 +56,7 @@ app.use('/api/message',msgRouter)
 
 // important points on socket.io
 // it is used to create web sockets
-// web sockets are full duplex communicatio channels in tcp io.e bidirectional communication
+// web sockets are full duplex communicatio channels in tcp i.e bidirectional communication
 // io is a server socket and sockets are local io.e user specific
 // main functions involved all of these functions can be used in both client and server side
 
@@ -83,9 +83,9 @@ io.on('connection',(socket)=>{
     console.log('User connected to socket.io')
 //event for setup of socket
     socket.on('setup',(userData)=>{
-        //user joined a room with their id
-        socket.join(userData.id)
-        console.log(userData.id);
+        //room name is user._id,user joins this room
+        socket.join(userData._id)
+        console.log(userData._id);
         //connected will be emitted we can listen to this event in front end using emit or on
         //we will use on so that we can provide a call back
         // emit is used when we need to provide some values to the event
@@ -107,6 +107,7 @@ io.on('connection',(socket)=>{
             if(user._id == newMessageRecieved.sender._id)return;
             //socket will go inside of the room  with the user id as the name of the room and will emit an event message recieved
             //we can add a call back on this event whenever a user ecieves a msg hence we will use on to listen to this event in the front end
+            console.log('entering the room ',user._id);
             socket.in(user._id).emit('message recieved',newMessageRecieved)
         })
 

@@ -6,6 +6,7 @@ import { ViewIcon } from '@chakra-ui/icons'
 const ProfileModal = ({user,children}) => {
     // console.log(children);
     const { isOpen, onOpen, onClose } = useDisclosure()
+    // console.log(user)
   return (
     <>
     {children ? (<span onClick={onOpen}>{children}</span>):(<IconButton icon={<ViewIcon/>} onClick={onOpen}/>)}

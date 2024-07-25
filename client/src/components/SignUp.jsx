@@ -1,16 +1,24 @@
 import { Button, FormControl, VStack , FormLabel,Input } from '@chakra-ui/react'
 import React, { useState } from 'react'
 import axios from 'axios'
+import toast, { Toaster } from 'react-hot-toast'
+import { useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
 
     const[userData , setUserData] = useState({email:'',password:'',username:'',pic:''})
+    const navigate = useNavigate()
     const handleSubmit = async(e)=>{
         e.preventDefault()
         const response = await axios.post('/api/register',{...userData})
         console.log(response.data)
+        if(response.data.error){
+          toast.error(response.data.error)
+        }
+        navigate('/chatpage')
     }
-  return (
+  return (<>
+    <Toaster/>
     <VStack spacing='5px'>
         <form onSubmit={(e)=>handleSubmit(e)}>
         <FormControl>
@@ -39,6 +47,7 @@ const SignUp = () => {
         >Sign Up</Button>
         </form>
     </VStack>
+    </>
   )
 }
 

@@ -4,10 +4,10 @@ const {hashpassword,comparePass} = require('../helper/auth')
 
 
 const ifauthenticated = async(req,res)=>{
-    console.log(req.isAuthenticated());
+    // console.log(req.isAuthenticated());
     if(req.isAuthenticated()){
-        console.log(req.user)
-        return res.json({email:req.user.email,userName:req.user.userName,pic:req.user.pic,id:req.user._id})
+        // console.log(req.user)
+        return res.json({email:req.user.email,userName:req.user.userName,pic:req.user.pic,_id:req.user._id})
     }else{
         return res.json(null)
     }

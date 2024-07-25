@@ -1,10 +1,12 @@
 export default function getSender(loggedUser,users){
-    return users[0]?._id === loggedUser?.id ? users[1].userName : users[0].userName;
+    // return users[0]._id === loggedUser._id ? loggedUser.userName : users[1].userName;
+    const sender = users.filter((user)=>user._id!==loggedUser._id)
+    return sender[0].userName
     // return "sender"
 }
 
 export function getSenderFull(loggedUser,users){
-    return users[0]?._id === loggedUser?.id ? users[1] : users[0];
+    return users[0]?._id === loggedUser?._id ? users[1] : users[0];
     // return "sender"
 }
 export const isSameSenderMargin = (messages, m, i, userId) => {

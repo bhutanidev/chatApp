@@ -4,15 +4,16 @@ const USER = require('../models/userModel')
 
 const accessChat = async(req,res)=>{
     const {userId} = req.body
+    console.log(userId)
+    console.log(req.user)
     if(!userId){
         return res.status(400).json({error:'pass user id'})
     }
 
     let chat = CHAT.find({isGroup:false,
-        users:{$elemMatch:{$eq:req.user._id}},
-        users:{$elemMatch:{$eq:userId}}
+        $and:[{users:{$elemMatch:{$eq:req.user._id}}},
+        {users:{$elemMatch:{$eq:userId}}}]
     }).populate('users','-password').populate('lastMsg')
-    // console.log(chat);
     chat = await USER.populate(chat,{
         path:'lastMsg.sender',
         select:'userName email pic'
@@ -21,6 +22,7 @@ const accessChat = async(req,res)=>{
     if(chat.length > 0){
         return res.send(chat[0])
     }
+    console.log(chat);
     const data = {
             isGroup:false,
             users:[req.user._id,userId],
@@ -30,7 +32,7 @@ const accessChat = async(req,res)=>{
 
     try {
         const newchat = await CHAT.create(data)
-        const findchat = await CHAT.find({_id:newchat._id}).populate('users','-password')
+        const findchat = await CHAT.findOne({_id:newchat._id}).populate('users','-password')
         return res.send(findchat)
     } catch (error) {
         return res.send(error)
@@ -41,6 +43,7 @@ const fetchChats = async(req,res)=>{
     const chats = await CHAT.find({users:{$elemMatch:{$eq:req.user._id}}}).populate("users", "-password")
     return res.send(chats)
 }
+
 
 const createGroupChat = async(req,res)=>{
     const {userList , chatName } = req.body
@@ -119,6 +122,7 @@ const removeGroup = async(req,res)=>{
         return res.json({'deleted':true})
     }
 
+    
     return res.send(updated)
 
 }

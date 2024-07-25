@@ -12,6 +12,8 @@ import GroupChatModal from './GroupChatModal'
 const Chats = () => {
 
   const{user , setUser , setSelectedChat ,selectedChat , chats , setChats , fetchChatsAgain} = useContext(ChatContext)
+  console.log('user',user)
+  console.log('chats',chats)
   const fetchChats = async()=>{
     try {
       const response = await axios.get('/api/chat',{withCredentials:true})
@@ -25,8 +27,8 @@ const Chats = () => {
   },[fetchChatsAgain])
   return (
     <>
-    <Box d={{base:selectedChat ? "none" : "flex" , md:"flex"}} flexDir='column' bgColor={'white'} borderRadius="lg" h='100%' w={400}>
-      <Box display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'}>
+    <Box overflow={'auto'} d={{base:selectedChat ? "none" : "flex" , md:"flex"}} flexDir='column' bgColor={'white'} borderRadius="lg" h='100%' w={400} className='example'>
+      <Box position={'sticky'} top={0} display={'flex'} flexDirection={'row'} alignItems={'center'} justifyContent={'space-between'} bgColor={'white'}>
         <Text>My Chats</Text>
         <GroupChatModal>
           <Button rightIcon={<AddIcon/>}>New Group Chat</Button>

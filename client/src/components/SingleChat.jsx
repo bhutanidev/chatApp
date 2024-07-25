@@ -61,7 +61,8 @@ const SingleChat = () => {
 
     useEffect(()=>{
         socket.on("message recieved",(newMessageRecieved)=>{
-            if(!selectedChatCompare || selectedChatCompare._id!==selectedChat._id) {
+            console.log(selectedChatCompare)
+            if(!selectedChatCompare || selectedChatCompare._id!==newMessageRecieved.chat._id) {
                 //give noti
             }
             setMessages([...messages,newMessageRecieved])

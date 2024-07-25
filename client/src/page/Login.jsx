@@ -1,4 +1,4 @@
-import { Button, Container, Text   } from '@chakra-ui/react'
+import { Button, Center, Container, Text   } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
 import LoginForm from '../components/LoginForm'
 import SignUp from '../components/SignUp'
@@ -22,9 +22,10 @@ const Login = () => {
   return (
     <>
     <Toaster/>
-    <Container  bg={'white'} height='500px'>
-        <Tabs variant='enclosed'>
-  <TabList>
+    <Center h={'100vh'} width={'100vw'}>
+    <Container  bg={'white'} height={'fit-content'} width={'500px'}>
+        <Tabs variant='enclosed' >
+          <TabList>
     <Tab w="50%">Login</Tab>
     <Tab w="50%">Sign-Up</Tab>
   </TabList>
@@ -38,6 +39,7 @@ const Login = () => {
   </TabPanels>
 </Tabs>
     </Container>
+    </Center>
     </>
   )
 }
